@@ -24,7 +24,8 @@
             formData.append("file", input);
 
             try {
-                let response = await fetch("https://30ee-34-69-34-255.ngrok-free.app", {  // Replace with your ngrok URL
+                // let response = await fetch("https://30ee-34-69-34-255.ngrok-free.app", {  // Replace with your ngrok URL
+                let response = await fetch("https://152b-34-69-34-255.ngrok-free.app/predict", {
                     method: "POST",
                     body: formData
                 });
