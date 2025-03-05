@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAPTCHA Decoder</title>
+</head>
+<body>
+    <h2>Upload CAPTCHA Image</h2>
+    <input type="file" id="imageInput">
+    <button onclick="uploadImage()">Submit</button>
+    <h3>Extracted Text:</h3>
+    <p id="outputText"></p>
+
+    <script>
+        async function uploadImage() {
+            let input = document.getElementById("imageInput").files[0];
+            if (!input) {
+                alert("Please select an image!");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("file", input);
+
+            try {
+                let response = await fetch("https://30ee-34-69-34-255.ngrok-free.app", {  // Replace with your ngrok URL
+                    method: "POST",
+                    body: formData
+                });
+
+                let result = await response.json();
+                document.getElementById("outputText").innerText = result.captcha_text || "Error processing image.";
+            } catch (error) {
+                document.getElementById("outputText").innerText = "Failed to connect to server.";
+            }
+        }
+    </script>
+</body>
+</html>
